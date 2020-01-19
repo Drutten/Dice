@@ -1,0 +1,226 @@
+
+* {
+   box-sizing: border-box;
+}
+body {
+   background-color: rgb(0, 128, 0); 
+}
+
+.my-container {
+   width: 80%;
+   height: 300px;
+   margin-left: 40px;
+   padding-left: 20px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+.cube {
+   width: 100px;
+   height: 100px;
+   position: relative;
+   -webkit-transform-style: preserve-3d; 
+   transform-style: preserve-3d; /*Not supported by IE11 and earlier*/
+   -webkit-transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+   transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+}
+
+.cube div:first-of-type {
+   z-index: 99;
+}
+
+.dice-img {
+   width: 100px;
+   height: 100px;
+}
+ 
+.side {
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   border: 1px solid rgb(255, 255, 255);
+   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* By default show side 1 */
+
+.side1{
+	-webkit-transform: rotateX(0deg) translateZ(50px);
+	transform: rotateX(0deg) translateZ(50px); /*tranlateZ value half the size of dice*/
+}
+
+.side2{
+	-webkit-transform: rotateX(-90deg) translateZ(50px);
+	transform: rotateX(-90deg) translateZ(50px); 
+}
+
+.side3{
+	-webkit-transform: rotateY(90deg) translateZ(50px);
+	transform: rotateY(90deg) translateZ(50px);
+}
+
+.side4{
+	-webkit-transform: rotateY(-90deg) translateZ(50px);
+	transform: rotateY(-90deg) translateZ(50px);
+}
+
+.side5{
+	-webkit-transform: rotateX(90deg) translateZ(50px);
+	transform: rotateX(90deg) translateZ(50px);
+}
+
+.side6{
+	-webkit-transform: rotateX(-180deg) translateZ(50px);
+	transform: rotateX(-180deg) translateZ(50px);
+}
+
+
+
+
+
+#reset-button {
+   display: none;
+}
+
+button {
+   margin-left: 40px;
+}
+
+
+.my-animation {
+   -webkit-animation-name: rotate;  /*Safari 4-8*/
+   animation-name: rotate;
+
+   -webkit-animation-iteration-count: 1;  
+   animation-iteration-count: 1;
+
+   -webkit-animation-duration: 1s; 
+   animation-duration: 1s;
+
+   -webkit-animation-timing-function: linear;  
+   animation-timing-function: linear;
+
+   -webkit-animation-fill-mode: forwards; 
+   animation-fill-mode: forwards;
+}
+
+
+
+/*Keyframes*/
+@-webkit-keyframes rotate {
+   0% {
+      -webkit-transform: rotateX(0deg) rotateY(0deg);
+      transform: rotateX(0deg) rotateY(0deg); 
+      left: 0px;
+   }
+   50% {
+      -webkit-transform: rotateX(90deg) rotateY(290deg);
+      transform: rotateX(90deg) rotateY(290deg); 
+      left: 200px;
+   }
+   100% {
+      -webkit-transform: rotateX(-360deg) rotateY(360deg); 
+      transform: rotateX(-360deg) rotateY(360deg); 
+      left: 400px;
+   }  
+}
+
+@keyframes rotate {
+   0% {
+      -webkit-transform: rotateX(0deg) rotateY(0deg);
+      transform: rotateX(0deg) rotateY(0deg); 
+      left: 0px;
+   }
+   50% {
+      -webkit-transform: rotateX(90deg) rotateY(290deg);
+      transform: rotateX(90deg) rotateY(290deg); 
+      left: 200px;
+   }
+   100% {
+      -webkit-transform: rotateX(-360deg) rotateY(360deg); 
+      transform: rotateX(-360deg) rotateY(360deg); 
+      left: 400px;
+   }
+}
+
+
+/*Smaller screen*/
+@-webkit-keyframes small-rotate {
+   0% {
+      -webkit-transform: rotateX(0deg) rotateY(0deg);
+      transform: rotateX(0deg) rotateY(0deg); 
+   }
+   50% {
+      -webkit-transform: rotateX(90deg) rotateY(290deg);
+      transform: rotateX(90deg) rotateY(290deg); 
+   }
+   100% {
+      -webkit-transform: rotateX(-360deg) rotateY(360deg);
+      transform: rotateX(-360deg) rotateY(360deg); 
+   }
+}
+
+/*Smaller screen*/
+@keyframes small-rotate {
+   0% {
+      -webkit-transform: rotateX(0deg) rotateY(0deg);
+      transform: rotateX(0deg) rotateY(0deg); 
+   }
+   50% {
+      -webkit-transform: rotateX(90deg) rotateY(290deg);
+      transform: rotateX(90deg) rotateY(290deg); 
+   }
+   100% {
+      -webkit-transform: rotateX(-360deg) rotateY(360deg); 
+      transform: rotateX(-360deg) rotateY(360deg); 
+   }   
+}
+
+/*Animation for IE10 and IE11 since they don't support transform-style preserve3d*/
+@keyframes ie-rotate {
+   0% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); 
+      left: 0px;   
+   }
+   100% {
+      transform: rotateX(0deg) rotateY(0deg)  rotateZ(360deg); 
+      left: 400px;
+   }
+}
+
+/*Animation for IE small screen version*/
+@keyframes ie-small-rotate {
+   0% {
+      transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);    
+   }
+   100% {
+      transform: rotateX(0deg) rotateY(0deg)  rotateZ(360deg); 
+   }
+}
+
+
+
+/*Smaller screen 800px and less*/
+@media only screen and (max-width: 800px){
+   .my-animation {
+      -webkit-animation-name: small-rotate; 
+      animation-name: small-rotate;
+   }
+}
+
+/* IE media query. IE 10 and IE 11 don't support preserve3d*/
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { 
+   .my-animation {
+      animation-name: ie-rotate;
+   }
+}
+
+/*IE media query for smaller screen*/
+@media (max-width: 800px) and (-ms-high-contrast: none), (-ms-high-contrast: active) { 
+   .my-animation {
+      animation-name: ie-small-rotate;
+   }
+}
+
+
+
